@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="scripts/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="scripts/Project1.js"></script>
+    </head>
+    <body>
+        <a href = "/Project1TLB"> Search registration</a>
+        <a href = "/Project1TLB/register.html"> Register for a session</a>
+        <br>
+            <input type="text" name="firstname" id="fname">
+            <br>
+            <input type="text" name="lastname" id="lname">
+            <br>
+            <input type="text" name="displayname" id="dname">
+            <br>
+            <select>
+                <option value = "1"> Session 1 </option>
+                <option value = "2"> Session 2 </option>
+                <option value = "3"> Session 3 </option>
+                <option value = "4"> Session 4 </option>
+            </select>
+            <br>
+            <input type="submit" value="Submit" onclick="Project1.addUser()">
+            <br>
+            <div id="output"></div>
+    </body>
+</html>
