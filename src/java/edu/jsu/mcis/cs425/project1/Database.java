@@ -69,38 +69,39 @@ public class Database {
         
     }
     public String addRegistration(String fname, String lname, String dname, String sessionid) {
-        System.out.println("addRegistration() called");
         String query;
         String displayname;
-        String id;
+        String id = "";
         String regCode;
+        ResultSet keys;
         JSONObject results = new JSONObject();
         
         Connection conn = getConnection();
         query = ("INSERT INTO registrations (firstname, lastname, displayname, sessionid) values (?, ?, ?, ?);");
         
         try {
-            PreparedStatement statement = conn.prepareStatement(query);
+            PreparedStatement statement = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, fname);
             statement.setString(2, lname);
             statement.setString(3, dname);
             statement.setString(4, sessionid);
-            boolean isSuccess = statement.execute();
-            if (isSuccess) {
-                query = "SELECT id, displayname FROM registrations WHERE displayname = ?;";
-                statement.setString(1, dname);
+            int bool = statement.executeUpdate();
+            if (bool == 1) {
+                keys = statement.getGeneratedKeys();
+                if (keys.next()) {
+                    id = keys.getString(1);
+                }
             }
-            isSuccess = statement.execute();
-            if (isSuccess) {
-                ResultSet resultset = statement.getResultSet();
-                id = resultset.getString("id");
-                displayname = resultset.getString("displayname");
-                regCode = String.format("R" + "%0" + (6-id.length()) + "d%s", 0, id);
-                results.put(regCode, displayname);
-            }
+            
+            regCode = String.format("R" + "%0" + (6-id.length()) + "d%s", 0, id);
+            results.put("displayname", dname);
+            results.put("code", regCode);
+            
         }
         catch(Exception e){}
-        return results.toJSONString();
+        finally {
+            return (results.toJSONString());
+        }
     }
     
 }

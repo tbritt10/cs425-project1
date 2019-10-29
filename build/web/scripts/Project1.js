@@ -33,13 +33,19 @@ var Project1 = ( function () {
                 method: 'POST',
                 dataType: 'json',
                 success: function(response) {
-                    that.output(response);
+                    //console.log(response);
+                    that.outputJSON(response);
                 }
             });
         },
         output: function(response) {
             $("#output").html(response);
             
+        },
+        outputJSON: function(response) {
+            var congrats = "Congratulations! You have successfully registered as: ";
+            var yourcode = "Your registration code is: ";
+            $("#output").html("<p>" + congrats + response["displayname"] + "<br>" + yourcode + response["code"]);
         }
     };
 }());

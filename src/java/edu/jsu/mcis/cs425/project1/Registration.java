@@ -42,6 +42,7 @@ public class Registration extends HttpServlet {
         String sessionid = args[3];
         Database db = new Database();
         String result = db.addRegistration(fname, lname, dname, sessionid);
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println(result);
@@ -53,7 +54,7 @@ public class Registration extends HttpServlet {
             throws ServletException, IOException {
         processGet(request, response);
     }
-    
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processPost(request, response);

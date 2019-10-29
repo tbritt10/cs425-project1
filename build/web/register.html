@@ -11,14 +11,15 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" src="scripts/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="scripts/Project1.js"></script>
+
     </head>
     <body>
         <a href = "/Project1TLB"> Search registration</a>
         <a href = "/Project1TLB/register.html"> Register for a session</a>
         <br>
-            <input type="text" name="firstname" id="fname">
+            <input type="text" name="firstname" class="namefields" id="fname">
             <br>
-            <input type="text" name="lastname" id="lname">
+            <input type="text" name="lastname" class="namefields" id="lname">
             <br>
             <input type="text" name="displayname" id="dname">
             <br>
@@ -32,5 +33,12 @@ and open the template in the editor.
             <input type="submit" value="Submit" onclick="Project1.addUser()">
             <br>
             <div id="output"></div>
+            
+        <script>
+            $(".namefields").change(function(){
+                var disname = $("#fname").val() + " " + $("#lname").val();
+                $("#dname").val(disname);
+            });
+        </script>
     </body>
 </html>
